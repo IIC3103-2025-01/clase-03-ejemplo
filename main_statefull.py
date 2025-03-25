@@ -5,14 +5,30 @@ from user import User
 app = Flask(__name__)
 
 users = []
+login = False
 
 @app.route("/")
 def home():
   return "API HOME"
 
+@app.route("/login", methods=['POST'])
+def login_method():
+  global login
+
+  # Acá estaría la lógica de login
+
+  login = True
+  return jsonify({"status": "LOGGED"}), 200
+
 @app.route('/users', methods=['GET', 'POST'])
 def users_method():
   global users
+  global login
+
+  # Statefull: se necesita estado de login para acceder al recurso.
+  # Si servidor "se corta", no se "recupera" el estado loggeado
+  if not login:
+    return jsonify({"error": "NOT LOGGED"}), 401
 
   if request.method == 'POST':
     if not request.is_json:
