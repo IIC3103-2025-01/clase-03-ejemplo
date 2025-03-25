@@ -25,8 +25,9 @@ def users_method():
   global users
   global login
 
-  # Statefull: se necesita estado de login para acceder al recurso.
+  # Stateful: se necesita estado de login para acceder al recurso.
   # Si servidor "se corta", no se "recupera" el estado loggeado
+  # Un servidor stateless, la sesión se debería validar sin necesitar el estado o la variable login=True
   if not login:
     return jsonify({"error": "NOT LOGGED"}), 401
 

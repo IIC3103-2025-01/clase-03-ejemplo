@@ -20,5 +20,9 @@ pip install -r requirements.txt
 
 ## Ejecutar aplicación
 ```shell
+# Ejemplo 1
 flask --app main run
+
+# Ejemplo 2
+flask --app main_stateful run
 ```
